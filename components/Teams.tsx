@@ -9,6 +9,7 @@ type AppProps = {
 
 export default ({ teams }: AppProps) => {
   const [localTeams, SetLocalTeams] = React.useState(teams);
+  const [newTeam, SetNewTeam] = React.useState('');
 
   const handleAddChannel = (channelName: string, TeamName: string) => {
     const InternalTeams: team[] = [...localTeams];
@@ -27,7 +28,6 @@ export default ({ teams }: AppProps) => {
     });
     SetLocalTeams(InternalTeams);
   };
-
   const handleDeleteChannel = (channel: channel, TeamName: string) => {
     const InternalTeams: team[] = [...localTeams];
     const teamIndex = InternalTeams.findIndex(
@@ -39,7 +39,18 @@ export default ({ teams }: AppProps) => {
     InternalTeams[teamIndex].channels.splice(channelIndex, 1);
     SetLocalTeams(InternalTeams);
   };
-
+  const addTeam = e => {
+    if (newTeam) {
+      SetLocalTeams([...localTeams, { name: newTeam, channels: [] }]);
+    }
+    SetNewTeam('');
+    // e.preventDefault();
+    e.stopPropagation();
+    // e.stopImmediatePropagation();
+  };
+  const FormClickHandler = e => {
+    console.log('form is clicked');
+  };
   return (
     <Fragment>
       {localTeams &&
@@ -55,6 +66,24 @@ export default ({ teams }: AppProps) => {
             </div>
           );
         })}
+      {/* <div style={{ 'margin-top': '15px' }}> */}
+      <form
+        style={{ marginTop: '10px' }}
+        onSubmit={(e: any) => {
+          e.preventDefault();
+          // e.stopPropagation();
+          // e.stopImmediatePropagation();
+          addTeam(e);
+        }}
+        onClick={FormClickHandler}
+      >
+        <input
+          type="text"
+          value={newTeam}
+          onChange={e => SetNewTeam(e.target.value)}
+        />
+        <button onClick={addTeam}> Add New Team </button>
+      </form>
     </Fragment>
   );
 };

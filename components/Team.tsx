@@ -27,8 +27,10 @@ export default ({ team, handleDelete, addNewChannel }: AppProps) => {
       {team.channels &&
         team.channels.map(channel => {
           return (
-            <div key={channel.name + channel.id} style={{ margin: '18px' }}>
-              <span>{channel.name}</span>
+            <div key={channel.name + channel.id} style={{ margin: '5px' }}>
+              <h4 style={{ width: '100px', display: 'inline-block' }}>
+                {channel.name}
+              </h4>
               <button
                 style={{ margin: '5px' }}
                 onClick={() => handleDel(channel, team.name)}
@@ -38,17 +40,24 @@ export default ({ team, handleDelete, addNewChannel }: AppProps) => {
             </div>
           );
         })}
-      <div style={{ margin: '18px' }}>
+      <form style={{ margin: '5px' }} onSubmit={() => handleAdd()}>
         <input
           type="text"
           value={nameChannel}
           style={{ width: '100px' }}
           onChange={e => setNewChannel(e.target.value)}
         />
-        <button style={{ margin: '5px' }} onClick={() => handleAdd()}>
+        <button
+          style={{ margin: '5px' }}
+          disabled={
+            !nameChannel ||
+            !!(nameChannel && team.channels.find(a => a.name === nameChannel))
+          }
+          onClick={() => handleAdd()}
+        >
           add
         </button>
-      </div>
+      </form>
     </Fragment>
   );
   // return ;

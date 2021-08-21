@@ -7,9 +7,7 @@ import Teams from './components/Teams';
 import './style.css';
 
 interface AppProps {}
-interface AppState {
-  name: string;
-}
+interface AppState {}
 export interface channel {
   name: string;
   id: number;
@@ -32,38 +30,18 @@ const teams = [
         id: 2
       }
     ]
-  },
-  {
-    name: 'Team2',
-    channels: [
-      {
-        name: 'abc1',
-        id: 1
-      },
-      {
-        name: 'xyz1',
-        id: 2
-      }
-    ]
   }
 ];
 
 class App extends Component<AppProps, AppState> {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   name: 'React'
-    // };
   }
 
   render() {
     return (
       <div>
-        {/* <Hello name={this.state.name} /> */}
-
         <Teams teams={teams} />
-
-        {/* <p>Start editing to see some magic happen :)</p> */}
       </div>
     );
   }
