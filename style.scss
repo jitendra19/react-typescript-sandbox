@@ -46,8 +46,12 @@ h6 {
 }
 
 .list-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
-  width: 400px;
+  width: 450px;
   border: solid 1px $grey;
   .team-list {
     margin: 10px;
