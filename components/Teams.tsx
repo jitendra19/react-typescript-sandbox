@@ -82,7 +82,14 @@ export default ({ teams }: AppProps) => {
           value={newTeam}
           onChange={e => SetNewTeam(e.target.value)}
         />
-        <button onClick={addTeam}> Add New Team </button>
+        <button
+          onClick={addTeam}
+          disabled={
+            !newTeam || !!(newTeam && localTeams.find(a => a.name === newTeam))
+          }
+        >
+          Add New Team
+        </button>
       </form>
     </Fragment>
   );
