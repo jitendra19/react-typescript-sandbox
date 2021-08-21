@@ -3,6 +3,8 @@ import React, { Fragment } from 'react';
 import { channel, team } from '../index';
 import Team from './Team';
 
+// import '../style.scss';
+
 type AppProps = {
   teams: team[];
 };
@@ -53,26 +55,9 @@ export default ({ teams }: AppProps) => {
   };
   return (
     <Fragment>
-      {localTeams &&
-        localTeams.map(team => {
-          return (
-            <div key={team.name}>
-              <h2>{team.name}</h2>
-              <Team
-                team={team}
-                handleDelete={handleDeleteChannel}
-                addNewChannel={handleAddChannel}
-              />
-            </div>
-          );
-        })}
-      {/* <div style={{ 'margin-top': '15px' }}> */}
       <form
-        style={{ marginTop: '10px' }}
-        onSubmit={(e: any) => {
-          e.preventDefault();
-          // e.stopPropagation();
-          // e.stopImmediatePropagation();
+        className={'teamForm'}
+        onSubmit={e => {
           addTeam(e);
         }}
         onClick={FormClickHandler}
@@ -81,6 +66,7 @@ export default ({ teams }: AppProps) => {
           type="text"
           value={newTeam}
           onChange={e => SetNewTeam(e.target.value)}
+          placeholder="New Team"
         />
         <button
           onClick={addTeam}
@@ -88,9 +74,22 @@ export default ({ teams }: AppProps) => {
             !newTeam || !!(newTeam && localTeams.find(a => a.name === newTeam))
           }
         >
-          Add New Team
+          Add
         </button>
       </form>
+      {localTeams &&
+        localTeams.map(team => {
+          return (
+            <div key={team.name} className={'team-list'}>
+              <h4 className={'teamTitle'}>{team.name}</h4>
+              <Team
+                team={team}
+                handleDelete={handleDeleteChannel}
+                addNewChannel={handleAddChannel}
+              />
+            </div>
+          );
+        })}
     </Fragment>
   );
 };

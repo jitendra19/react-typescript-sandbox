@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import Hello from './components/Hello';
 import Teams from './components/Teams';
 
-import './style.css';
+import './style.scss';
 
 interface AppProps {}
 interface AppState {}
@@ -40,7 +40,7 @@ class App extends Component<AppProps, AppState> {
 
   render() {
     return (
-      <div>
+      <div className={'list-container'}>
         <Teams teams={teams} />
       </div>
     );

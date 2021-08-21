@@ -1,0 +1,94 @@
+@import './styles/colors';
+
+body {
+  font-family: Lato;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.button-primary {
+  margin: 5px;
+  background: $primary;
+  color: $black;
+  border-radius: 10px;
+  &:hover {
+    background: $green;
+  }
+  &:disabled {
+    background: $disabled;
+    color: $light-black;
+  }
+}
+
+.input {
+  background: $white;
+  color: $black;
+  border: none;
+  border-bottom: solid 1px $grey;
+  &:hover {
+    border-width: 2px;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.title {
+  text-align: left;
+  margin-left: 10px;
+}
+
+.list-container {
+  text-align: center;
+  width: 400px;
+  border: solid 1px $grey;
+  .team-list {
+    margin: 10px;
+    .teamTitle {
+      @extend .title;
+      color: $blue;
+    }
+    .channelList {
+      text-align: left;
+      width: 70%;
+      margin-left: 25px;
+      // border: solid 1px $grey;
+      .title {
+        @extend .title;
+        color: $green;
+        display: inline-block;
+      }
+      button {
+        @extend .button-primary;
+        margin-left: 10px;
+      }
+    }
+    .channelForm {
+      margin-left: 35px;
+      text-align: left;
+      input {
+        @extend .input;
+      }
+      button {
+        @extend .button-primary;
+      }
+    }
+  }
+  .teamForm {
+    margin: 10px;
+    text-align: left;
+    input {
+      @extend .input;
+    }
+    button {
+      @extend .button-primary;
+    }
+  }
+}
