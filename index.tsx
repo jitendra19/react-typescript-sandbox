@@ -3,11 +3,12 @@ import ReactDOM, { render } from 'react-dom';
 import { createStore } from 'redux';
 
 import reducer from './reducers';
+import { addNewTeam, addNewChannel, deleteChannel } from './actions';
 
 import Teams from './components/Teams';
 
 // TODO to add type interface for store
-const store = createStore(reducer);
+export const store = createStore(reducer);
 
 import './style.scss';
 
@@ -32,19 +33,9 @@ class App extends Component<AppProps, AppState> {
       <div className={'list-container'}>
         <Teams
           teams={store.getState()}
-          addNewTeam={teamName =>
-            store.dispatch({ type: 'ADD_NEW_TEAM', teamName })
-          }
-          addNewChannel={(channelName, teamName) =>
-            store.dispatch({
-              type: 'ADD_NEW_CHANNEL',
-              channelName,
-              teamName
-            })
-          }
-          deleteChannel={(id, teamName) =>
-            store.dispatch({ type: 'DELETE_CHANNEL', channelId: id, teamName })
-          }
+          addNewTeam={addNewTeam}
+          addNewChannel={addNewChannel}
+          deleteChannel={deleteChannel}
         />
       </div>
     );
