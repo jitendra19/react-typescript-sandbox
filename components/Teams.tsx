@@ -7,52 +7,42 @@ import Team from './Team';
 
 type AppProps = {
   teams: team[];
+  // TODO update types for below functions
+  addNewTeam: (newTeamName: any) => any;
+  addNewChannel: (channelName: string, teamName: string) => any;
+  deleteChannel: (id: number, teamName: string) => any;
 };
 
-export default ({ teams }: AppProps) => {
-  const [localTeams, SetLocalTeams] = React.useState(teams);
+export default ({
+  teams,
+  addNewTeam,
+  addNewChannel,
+  deleteChannel
+}: AppProps) => {
   const [newTeam, SetNewTeam] = React.useState('');
 
   const handleAddChannel = (channelName: string, TeamName: string) => {
-    const InternalTeams: team[] = [...localTeams];
-    const teamIndex = InternalTeams.findIndex(
-      (team: team) => team.name === TeamName
-    );
-    const LastchannelId =
-      InternalTeams[teamIndex].channels.length &&
-      InternalTeams[teamIndex].channels[
-        InternalTeams[teamIndex].channels.length - 1
-      ].id;
-    // InternalTeams[teamIndex].channels.splice(channelIndex, 1);
-    InternalTeams[teamIndex].channels.push({
-      name: channelName,
-      id: LastchannelId + 1
-    });
-    SetLocalTeams(InternalTeams);
+    addNewChannel(channelName, TeamName);
   };
+
   const handleDeleteChannel = (channel: channel, TeamName: string) => {
-    const InternalTeams: team[] = [...localTeams];
-    const teamIndex = InternalTeams.findIndex(
-      (team: team) => team.name === TeamName
-    );
-    const channelIndex = InternalTeams[teamIndex].channels.findIndex(
-      (ch: channel) => ch.name === channel.name && ch.id === channel.id
-    );
-    InternalTeams[teamIndex].channels.splice(channelIndex, 1);
-    SetLocalTeams(InternalTeams);
+    deleteChannel(channel.id, TeamName);
   };
+
   const addTeam = e => {
     if (newTeam) {
-      SetLocalTeams([...localTeams, { name: newTeam, channels: [] }]);
+      addNewTeam(newTeam);
     }
     SetNewTeam('');
     // e.preventDefault();
     e.stopPropagation();
     // e.stopImmediatePropagation();
   };
+
   const FormClickHandler = e => {
     console.log('form is clicked');
   };
+
   return (
     <Fragment>
       <form
@@ -71,14 +61,14 @@ export default ({ teams }: AppProps) => {
         <button
           onClick={addTeam}
           disabled={
-            !newTeam || !!(newTeam && localTeams.find(a => a.name === newTeam))
+            !newTeam || !!(newTeam && teams.find(a => a.name === newTeam))
           }
         >
           Add
         </button>
       </form>
-      {localTeams &&
-        localTeams.map(team => {
+      {teams &&
+        teams.map(team => {
           return (
             <div key={team.name} className={'team-list'}>
               <h4 className={'teamTitle'}>{team.name}</h4>
