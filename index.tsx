@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM, { render } from 'react-dom';
+import { render } from 'react-dom';
 import { createStore } from 'redux';
 
 import reducer from './reducers';
@@ -30,7 +30,11 @@ class App extends Component<AppProps, AppState> {
 
   render() {
     return (
-      <div className={'list-container'}>
+      <div
+        className={'list-container'}
+        id="asdf"
+        onClick={() => console.log('logging from list-container div')}
+      >
         <Teams
           teams={store.getState()}
           addNewTeam={addNewTeam}

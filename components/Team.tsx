@@ -2,6 +2,9 @@ import React, { Fragment } from 'react';
 
 import { channel, team } from '../index';
 
+import Parent from './parent.component';
+import Child from './child.component';
+
 interface AppProps {
   team: team;
   handleDelete: (channel: channel, name: string) => void;
@@ -43,6 +46,7 @@ export default ({ team, handleDelete, addNewChannel }: AppProps) => {
           Add
         </button>
       </form>
+
       {team.channels &&
         team.channels.map(channel => {
           return (
@@ -54,6 +58,9 @@ export default ({ team, handleDelete, addNewChannel }: AppProps) => {
             </div>
           );
         })}
+      <Parent>
+        <Child />
+      </Parent>
     </Fragment>
   );
   // return ;

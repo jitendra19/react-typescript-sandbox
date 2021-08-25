@@ -51,6 +51,7 @@ export default ({
           addTeam(e);
         }}
         onClick={FormClickHandler}
+        id="teamForm"
       >
         <input
           type="text"
@@ -70,7 +71,11 @@ export default ({
       {teams &&
         teams.map(team => {
           return (
-            <div key={team.name} className={'team-list'}>
+            <div
+              key={team.name}
+              className={'team-list'}
+              onClick={() => console.log('logging from team-list div')}
+            >
               <h4 className={'teamTitle'}>{team.name}</h4>
               <Team
                 team={team}
