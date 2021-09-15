@@ -6,6 +6,7 @@ import reducer from './reducers';
 import { addNewTeam, addNewChannel, deleteChannel } from './actions';
 
 import Teams from './components/Teams';
+import Table from './components/table';
 
 // TODO to add type interface for store
 export const store = createStore(reducer);
@@ -41,6 +42,7 @@ class App extends Component<AppProps, AppState> {
           addNewChannel={addNewChannel}
           deleteChannel={deleteChannel}
         />
+        {/* <Table /> */}
       </div>
     );
   }

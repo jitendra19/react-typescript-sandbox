@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import { channel, team } from '../index';
 import Team from './Team';
+import Table from './table';
 
 // import '../style.scss';
 
@@ -85,6 +86,7 @@ export default ({
             </div>
           );
         })}
+      <Table teams={teams} />
     </Fragment>
   );
 };
