@@ -18,19 +18,27 @@ export default ({
   teams,
   addNewTeam,
   addNewChannel,
-  deleteChannel
+  deleteChannel,
 }: AppProps) => {
   const [newTeam, SetNewTeam] = React.useState('');
 
   const handleAddChannel = (channelName: string, TeamName: string) => {
     addNewChannel(channelName, TeamName);
+    fetch('https://jsonmock.hackerrank.com/api/stocks?date=5-January-2000')
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(() => {});
   };
 
   const handleDeleteChannel = (channel: channel, TeamName: string) => {
     deleteChannel(channel.id, TeamName);
   };
 
-  const addTeam = e => {
+  const addTeam = (e) => {
     if (newTeam) {
       addNewTeam(newTeam);
     }
@@ -40,7 +48,7 @@ export default ({
     // e.stopImmediatePropagation();
   };
 
-  const FormClickHandler = e => {
+  const FormClickHandler = (e) => {
     console.log('form is clicked');
   };
 
@@ -48,7 +56,7 @@ export default ({
     <Fragment>
       <form
         className={'teamForm'}
-        onSubmit={e => {
+        onSubmit={(e) => {
           addTeam(e);
         }}
         onClick={FormClickHandler}
@@ -57,20 +65,20 @@ export default ({
         <input
           type="text"
           value={newTeam}
-          onChange={e => SetNewTeam(e.target.value)}
+          onChange={(e) => SetNewTeam(e.target.value)}
           placeholder="New Team"
         />
         <button
           onClick={addTeam}
           disabled={
-            !newTeam || !!(newTeam && teams.find(a => a.name === newTeam))
+            !newTeam || !!(newTeam && teams.find((a) => a.name === newTeam))
           }
         >
           Add
         </button>
       </form>
       {teams &&
-        teams.map(team => {
+        teams.map((team) => {
           return (
             <div
               key={team.name}
